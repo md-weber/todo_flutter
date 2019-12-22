@@ -4,15 +4,18 @@ import 'package:todo_flutter/models/task.dart';
 class TaskTile extends StatelessWidget {
   final Task task;
   final Function onChanged;
+  final Function onLongPress;
 
-  const TaskTile({Key key, this.task, this.onChanged}) : super(key: key);
+  const TaskTile({Key key, this.task, this.onChanged, this.onLongPress})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () {
+      onLongPress: onLongPress,
+/*      onTap: () {
         onChanged(false);
-      },
+      },*/
       title: Text(
         task.name,
         style: TextStyle(
