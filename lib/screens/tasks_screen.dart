@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_flutter/main.dart';
 import 'package:todo_flutter/models/task.dart';
+import 'package:todo_flutter/models/task_data.dart';
 import 'package:todo_flutter/screens/add_task_screen.dart';
 import 'package:todo_flutter/widgets/tasks_list.dart';
 
@@ -60,7 +60,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   ),
                 ),
                 Text(
-                  "${taskListDataProvider.taskList.length} Tasks",
+                  "${taskListDataProvider.taskCount} Tasks",
                   style: TextStyle(
                     color: Colors.white,
                   ),
