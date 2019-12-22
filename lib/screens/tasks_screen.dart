@@ -1,6 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_flutter/main.dart';
 import 'package:todo_flutter/models/task.dart';
 import 'package:todo_flutter/screens/add_task_screen.dart';
 import 'package:todo_flutter/widgets/tasks_list.dart';
@@ -11,10 +11,10 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-  List<Task> taskList = [];
-
   @override
   Widget build(BuildContext context) {
+    var taskListDataProvider = Provider.of<TaskListData>(context);
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
@@ -24,7 +24,7 @@ class _TasksScreenState extends State<TasksScreen> {
             builder: (context) => AddTaskScreen(
               onAddTask: (Task task) {
                 setState(() {
-                  taskList.add(task);
+                  taskListDataProvider.addNewTask(task);
                   Navigator.pop(context);
                 });
               },
@@ -60,7 +60,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   ),
                 ),
                 Text(
-                  "${taskList.length} Tasks",
+                  "${taskListDataProvider.taskList.length} Tasks",
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -78,9 +78,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   topRight: Radius.circular(30.0),
                 ),
               ),
-              child: TasksList(
-                taskList: taskList,
-              ),
+              child: TasksList(),
             ),
           )
         ],
